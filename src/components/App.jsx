@@ -4,7 +4,7 @@ import css from "./App.module.css"
 
 import { Section } from './Section/Section';
 import { FeedbackOptions} from "./FeedbackOptions/FeedbackOptions"
-import { Statistic} from "./Statistics/Statistics"
+import { Statistics} from "./Statistics/Statistics"
 
 export class App extends React.Component {
 state = {
@@ -14,15 +14,16 @@ state = {
   }
 
   onLeaveFeedback = event => {
-    console.log(event)
+    this.setState({ [event]: this.state[event] + 1 });
   }
   
   countTotalFeedback = () => {
-
+  return Object.values(this.state).reduce((state, num) => state + num, 0)
   }
 
   countPositiveFeedbackPercentage = () => {
-
+    const total = this.countTotalFeedback()
+    return total !== Infinity ? Math.round((this.state.good * 100) / total) : 0
   }
 
   render() {
@@ -35,7 +36,7 @@ state = {
           ></FeedbackOptions>
         </Section>
         <Section title="Statistics">
-        
+        <Statistics good={this.state.good} neutral={this.state.neutral} bad={this.state.bad} total={this.countTotalFeedback()} positivePercentage={this.countPositiveFeedbackPercentage()}></Statistics>
         </Section>
       </div>
     )
