@@ -28,16 +28,15 @@ state = {
   render() {
     return (
       <div>
-        <title className={css.title}>Hello</title>
         <Section title="Please leave feedback">
           <FeedbackOptions
             options={Object.keys(this.state)}
             onLeaveFeedback={this.onLeaveFeedback}
           ></FeedbackOptions>
         </Section>
-        {/* <Section title="Statistics">
+        <Section title="Statistics">
         
-        </Section> */}
+        </Section>
       </div>
     )
   }
